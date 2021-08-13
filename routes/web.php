@@ -1,6 +1,7 @@
 <?php
 
 use App\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,12 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts/', function () {
-    $response = 'All Posts:';
-    $posts = Post::get();
-    foreach ($posts as $post) {
-        $response .= $post;
-    }
-    // error_log($response);
-    return $response;
-});
+Route::get('/posts/', 'PostController@allPost');
+
+Route::get('/posts/insert', 'PostController@insertPost');

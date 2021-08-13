@@ -16,23 +16,20 @@ class PostTest extends TestCase
      *
      * @return void
      */
-    public function testAppPost()
+    protected function setUp(): void
     {
-        $post = factory(Post::class)->create();
+        parent::setUp();
 
-        $response = $this->get('/posts/');
-        $response->assertStatus(200);
-        $response->assertSee('All Posts:');
-
-        $response->assertSee("Hello, I");
+        $this->withoutExceptionHandling();
     }
 
-    public function testInsertPost()
+    public function testInsertPostByGetRoute()
     {
-        $post = factory(Post::class)->create();
+        $text = "Its a new post";
 
-        $this->assertDatabaseHas('posts', [
-            'post_text' => "Hello, I'm Louis."
-        ]);
+        $this->get("/posts/insert?post_text=$text");
+        $response = $this->get('/posts/');
+
+        $response->assertSee($text);
     }
 }
