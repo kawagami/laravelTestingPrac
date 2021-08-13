@@ -12,6 +12,8 @@ class PostController extends Controller
         $post = new Post;
         $post->post_text = $request->input('post_text');
         $post->save();
+
+        return redirect('/');
     }
 
     public function allPost()

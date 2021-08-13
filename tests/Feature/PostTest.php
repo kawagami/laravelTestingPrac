@@ -23,13 +23,28 @@ class PostTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    public function testInsertPostByGetRoute()
+    // public function testInsertPostByGetRoute()
+    // {
+    //     $text = "Its a new post";
+
+    //     $this->get("/posts/insert?post_text=$text");
+    //     $response = $this->get('/posts/');
+
+    //     $response->assertSee($text);
+    // }
+
+    public function testInsertPostByPostRoute()
     {
         $text = "Its a new post";
 
-        $this->get("/posts/insert?post_text=$text");
-        $response = $this->get('/posts/');
+        $this->post(
+            '/post',
+            ['post_text' => $text]
+        );
 
+        $this->assertDatabaseHas('posts', ['post_text' => $text]);
+
+        $response = $this->get('/posts');
         $response->assertSee($text);
     }
 }

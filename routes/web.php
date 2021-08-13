@@ -21,4 +21,10 @@ Route::get('/', function () {
 
 Route::get('/posts/', 'PostController@allPost');
 
-Route::get('/posts/insert', 'PostController@insertPost');
+// Route::get('/posts/insert', 'PostController@insertPost');
+
+Route::get('/post/form', function () {
+    return view('post_form');
+});
+
+Route::post('/post', 'PostController@insertPost');
