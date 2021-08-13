@@ -1,5 +1,6 @@
 <?php
 
+use App\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/posts/', function () {
+    $response = 'All Posts:';
+    $posts = Post::get();
+    foreach ($posts as $post) {
+        $response .= $post;
+    }
+    // error_log($response);
+    return $response;
 });
